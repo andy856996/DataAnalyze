@@ -1,0 +1,27 @@
+---
+title: "Slide Test"
+author: "Jared P. Lander"
+date: "December 22, 2016"
+output: ioslides_presentation
+---
+  
+## 第一張投影片
+一些項目的列表
+- 第一項目
+- 第二項目
+- 第三項目
+
+## 一些R程式碼
+以下程式碼將產生一些結果與圖
+```{r figure-plot,fig.cap="繪製一個數字1到10的圖", fig.scap="數字1到10的圖",
+out.width='50%', fig.show='hold'}
+1 + 1
+plot(1:10)
+2 + 2
+```
+## 另一張投影片
+一些投影片資訊
+
+## 一些連結
+[我的網頁](http://www.jaredlander.com)
+[R Bloggers](http://www.r-bloggers.com)

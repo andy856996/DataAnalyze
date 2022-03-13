@@ -1,0 +1,45 @@
+---
+title: "Simple Shiny Document"
+author: "Jared P. Lander"
+date: "November 3, 2016"
+output: html_document
+runtime: shiny
+---
+
+
+```{r build-selector,echo=FALSE}
+selectInput(inputId='ExampleDropDown',
+            label='Please make a selection',
+            choices=list('Value 1'=1,
+                         'Value 2'=2,
+                         'Value 3'=3))
+```
+
+
+```{r select-print-drop-down,echo=FALSE}
+selectInput(inputId='ExampleDropDown', label='Please make a selection',
+            choices=list('Value 1'=1,
+                         'Value 2'=2,
+                         'Value 3'=3))
+renderPrint(input$ExampleDropDown)
+```
+
+
+```{r common-inputs,echo=FALSE}
+sliderInput(inputId='SliderSample', label='This is a slider',
+            min=0, max=10, value=5)
+textInput(inputId='TextSample', label='Space to enter text')
+checkboxInput(inputId='CheckSample', label='Single check box')
+checkboxGroupInput(inputId='CheckGroupSample',
+                   label='Multiple check boxes',
+                   choices=list('A', 'B', 'C'))
+radioButtons(inputId='RadioSample', label='Radio button',
+             choices=list('A', 'B', 'C'))
+dateInput(inputId='DateChoice', label='Date Selector')
+```
+
+
+```{r shiny-datatable-diamonds,echo=FALSE}
+data(diamonds, package='ggplot2')
+renderDataTable(diamonds)
+```

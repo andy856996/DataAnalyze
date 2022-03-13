@@ -1,0 +1,24 @@
+---
+title: "Simple Shiny Document - 29-2"
+author: "Jared P. Lander"
+date: "November 3, 2016"
+output: html_document
+runtime: shiny
+---
+
+
+```{r text-input-output,echo=FALSE}
+textInput(inputId='TextInput', label='Enter Text')
+renderText(input$TextInput)
+```
+
+
+```{r render-date-reactive,echo=FALSE}
+library(lubridate)
+dateInput(inputId='DateChoice', label='Choose a date')
+theDate <- reactive(input$DateChoice)
+renderText(sprintf('%s %s, %s',
+month(theDate(), label=TRUE, abbr=FALSE),
+day(theDate()),
+year(theDate())))
+```

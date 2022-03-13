@@ -1,0 +1,61 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+%\DeclareGraphicsExtensions{.png,.jpg}
+\newcommand{\dataframe}{\texttt{data.frame}}
+\title{A Simple Article}
+\author{Jared P. Lander\\ Lander Analytics}
+\date{December 22nd, 2016}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\section{Getting Started}
+\label{sec:GettingStarted}
+
+
+<<load-and-model-diamonds>>=
+# load ggplot
+library(ggplot2)
+
+# load and view the diamonds data
+data(diamonds)
+head(diamonds)
+
+# fit the model
+mod1 <- lm(price ~ carat + cut, data=diamonds)
+
+# view a summary
+summary(mod1)
+@
+
+\section{More Information}
+\label{sec:MoreInfo}
+
+\subsection{First Subsection}
+\label{FirstSub}
+
+<<inline-plot-knitr>>=
+
+1 + 1
+
+plot(1:10)
+
+2 + 2
+
+@
+
+\subsection{Second Subsection}
+\label{SecondSub}
+
+<<figure-plot,fig.cap="Simple plot of the numbers 1 through 10.",fig.scap="Simple plot of the numbers 1 through 10",out.width='.75\\linewidth'>>=
+1 + 1
+
+plot(1:10)
+
+2 + 2
+@
+
+
+\end{document}

@@ -1,0 +1,9 @@
+---
+title: "28-4_1"
+output: html_document
+---
+
+```{r simple-math-ex}
+# ³o¬Oµù¸Ñ
+1 + 1
+```

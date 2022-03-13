@@ -1,0 +1,10 @@
+---
+title: "28-4_2"
+output: html_document
+---
+
+```{r code-and-plot}
+1 + 1
+plot(1:10)
+2 + 2
+```
