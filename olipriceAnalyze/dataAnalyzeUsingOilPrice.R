@@ -1,6 +1,6 @@
 rm(list = ls())#clear all data
 #set working directory#
-setwd("C:/Users/andy8/Desktop/DataAnalyze/olipriceAnalyze")
+setwd("C:/Users/andy856996/Desktop/DataAnalyze/olipriceAnalyze")
 #import library#
 library(data.table)
 #start the program#
