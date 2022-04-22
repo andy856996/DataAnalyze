@@ -22,3 +22,4 @@ fviz_cluster(kmeans.cluster,           # 分群結果
              geom = c("point","text"), # 點和標籤(point & label)
              frame.type = "norm")      # 框架型態
 
+

@@ -63,7 +63,7 @@ ansari.test(tip ~ sex, tips)
 # 設定var.equal=TRUE將進行標準的雙樣本t檢定
 # 設定var.equal=FALSE(預設)則進行Welch檢定
 t.test(tip ~ sex, data = tips, var.equal = TRUE)
-
+t.test(total_bill   ~ sex, data = tips, var.equal = TRUE)
 # ---------------------------------------------------------- #
 
 library(plyr)
@@ -72,6 +72,16 @@ tipSummary <- ddply(tips, "sex", summarize,
                     Lower=tip.mean - 2*tip.sd/sqrt(NROW(tip)),
                     Upper=tip.mean + 2*tip.sd/sqrt(NROW(tip)))
 tipSummary
+
+
+library(plyr)
+tipSummary <- ddply(tips, "sex", summarize,
+                    bill.mean=mean(total_bill), tip.sd=sd(tip),
+                    Lower=tip.mean - 2*tip.sd/sqrt(NROW(tip)),
+                    Upper=tip.mean + 2*tip.sd/sqrt(NROW(tip)))
+tipSummary
+
+
 
 # ---------------------------------------------------------- #
 

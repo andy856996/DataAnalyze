@@ -3,11 +3,11 @@
 # ---------
 # ---------------------------------------------------------- #
 
-tipAnova <- aov(tip ~ day - 1, tips)
+tipAnova <- aov(total_bill ~ day - 1, tips)
 
 # ---------------------------------------------------------- #
 
-tipIntercept <- aov(tip ~ day, tips)
+tipIntercept <- aov(total_bill ~ day, tips)
 tipAnova$coefficients
 tipIntercept$coefficients
 
@@ -18,14 +18,14 @@ summary(tipAnova)
 # ---------------------------------------------------------- #
 
 tipsByDay <- ddply(tips, "day", summarize,
-                   tip.mean=mean(tip), tip.sd=sd(tip),
-                   Length=NROW(tip),
+                   total_bill.mean=mean(total_bill), total_bill.sd=sd(total_bill),
+                   Length=NROW(total_bill),
                    tfrac=qt(p=.90, df=Length-1),
-                   Lower=tip.mean - tfrac*tip.sd/sqrt(Length),
-                   Upper=tip.mean + tfrac*tip.sd/sqrt(Length)
+                   Lower=total_bill.mean - tfrac*total_bill.sd/sqrt(Length),
+                   Upper=total_bill.mean + tfrac*total_bill.sd/sqrt(Length)
                    )
 
-ggplot(tipsByDay, aes(x=tip.mean, y=day)) + geom_point() +
+ggplot(tipsByDay, aes(x=total_bill.mean, y=day)) + geom_point() +
        geom_errorbarh(aes(xmin=Lower, xmax=Upper), height=.3)
 
 # ---------------------------------------------------------- #
