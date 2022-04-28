@@ -4,5 +4,5 @@ library(ggplot2)
 #https://www.jaredlander.com/data/tomatofirst.csv
 data_tomato <- read.csv("https://www.jaredlander.com/data/TomatoFirst.csv", header=TRUE, sep=",", fileEncoding = 'BIG5')
 head(data_tomato)
-t.test(data_tomato$Price, alternative = "two.sided", mu = 2.5)
+T_tomato <- t.test(data_tomato$Price, alternative = "two.sided", mu = 2.5)
 data_tomato[!is.na(data_tomato)]
