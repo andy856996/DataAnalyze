@@ -16,7 +16,9 @@ s_size = round(0.7 * nrow(second_data))#second
 t_size = round(0.7 * nrow(third_data)) #third
 
 train_data <- rbind(first_data[1:f_size,], second_data[1:s_size,],third_data[1:t_size,])
-test_data  <- rbind(first_data[(f_size+1):nrow(first_data),], second_data[(s_size+1):nrow(second_data),],third_data[(t_size+1):nrow(third_data),])
+test_data  <- rbind(first_data[(f_size+1):nrow(first_data),]
+                    , second_data[(s_size+1):nrow(second_data),]
+                    ,third_data[(t_size+1):nrow(third_data),])
 #整理資料
 train_data$first <- ifelse(train_data$Cultivar == 1, 1, 0)
 train_data$second <- ifelse(train_data$Cultivar == 2, 1, 0)
@@ -28,7 +30,7 @@ test_data$third <- ifelse(test_data$Cultivar == 3, 1, 0)
 
 #訓練模型
 f1 <- as.formula('first + second + third  ~ Alcohol + Malic.acid + Ash + Alcalinity.of.ash + Magnesium + Total.phenols + Flavanoids + Nonflavanoid.phenols + Proanthocyanins + Color.intensity + Hue + OD280.OD315.of.diluted.wines + Proline')
-bpn <- neuralnet(formula = f1, data = train_data, hidden = c(5,5),learningrate = 0.01)
+bpn <- neuralnet(formula = f1, data = train_data, hidden = c(4,3,3),learningrate = 0.01)
 predicted_data <- compute(bpn,test_data)
 predictions <- predicted_data$net.result
 
@@ -37,19 +39,17 @@ AnsOutPut <-  rep(0,length(1:nrow(predictions)))
 ans = 0
 for(i in c(1:nrow(predictions))){ # for-loop裡，i會依序帶入1~135的值，重複進行括號內的程式碼
   if(predictions[i,1] > predictions[i,2]){
-    ans = 1
+    if(predictions[i,1] > predictions[i,3]){
+      ans = 1
+    }else{
+      ans = 3
+    }
   }else{
-    ans = 2
-  }
-  if(predictions[i,2] > predictions[i,3]){
-    ans = 2
-  }else{
-    ans = 3
-  }
-  if(predictions[i,1] > predictions[i,3]){
-    ans = 1
-  }else{
-    ans = 3
+    if(predictions[i,2] > predictions[i,3]){
+      ans = 2
+    }else{
+      ans = 3
+    }
   }
   AnsOutPut[i] = ans
 }
@@ -59,10 +59,12 @@ for(i in c(1:nrow(predictions))){ # for-loop裡，i會依序帶入1~135的值，
 
 error <- data.frame(test_data$Cultivar,AnsOutPut)
 library(ggplot2)
-ggplot(error,aes(x=test_data$Cultivar,y=AnsOutPut)) + geom_point() + stat_smooth()
-
-
-print(bpn)
-
+ggplot(error,aes(x=test_data$Cultivar,y=AnsOutPut)) + geom_point() + stat_smooth()+
+  
+  # 用labs()，進行文字上的標註(Annotation)
+  labs(title="forecast result",
+       x="predict result",
+       y="correct result") + theme(text = element_text(size = 20))    
+cor(test_data$Cultivar, AnsOutPut)
 #圖解BP
 plot(bpn)
