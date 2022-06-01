@@ -14,5 +14,4 @@ dataSixCity <- subset(data,item2 == "	桃園市" | item2 == "臺中市"
                       | item2 == "高雄市" | item2 == "新北市" | item2 == "臺南市" | item2 == "臺北市")
 SixCityRadiusLessThan2_5 <- subset(dataSixCity,value2 > 10)
 
-class(dataSixCity$value1)
-class(5)
+
